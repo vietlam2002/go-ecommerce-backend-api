@@ -1,0 +1,10 @@
+server:
+  port: 8002
+databases:
+  user: admin
+  password: user:admin
+  host: localhost
+  dbName: shopDev
+security:
+  jwt:
+    key: abc123
