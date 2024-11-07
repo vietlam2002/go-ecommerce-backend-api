@@ -14,7 +14,7 @@ type Config struct {
 		User     string `mapstructure:"user"`
 		Password string `mapstructure:"password"`
 		Host     string `mapstructure:"host"`
-	} `mapstructure:"database"`
+	} `mapstructure:"databases"`
 }
 
 func main() {
@@ -34,9 +34,13 @@ func main() {
 	fmt.Println("Server Port::", viper.GetString("security.jwt.key"))
 
 	var config Config
-	if err := viper.Unmarshal((&config); err != nil) {
-		fmt.Println("Unable to decode configuration %v", err)
+	if err := viper.Unmarshal(&config); err != nil {
+		fmt.Printf("Unable to decode configuration %v", err)
 	}
 
 	fmt.Println("Config Port::", config.Server.Port)
+
+	for _, db := range config.Databases {
+		fmt.Printf("databases User: %s, password: %s, host: %s \n", db.User, db.Password, db.Host)
+	}
 }
